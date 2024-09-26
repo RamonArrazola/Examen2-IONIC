@@ -1,3 +1,16 @@
-<p>
-  article works!
-</p>
+<ion-card>
+  <ion-card-subtitle class="ion-margin">
+    <span class="text-primary">{{i + 1 }}- </span>
+    <span class="album-artist-name">{{album.artist.name}}</span>
+  </ion-card-subtitle>
+  <ion-card-title class="ion-padding-horizontal ion-padding-bottom">
+    {{album.name}}
+  </ion-card-title>
+  <!-- <ion-img [src]="album.image"></ion-img> -->
+   <ion-img src="https://mexicanrarities.com/wp-content/uploads/1960/02/inah-sep_musica-indigena-de-mexico-06-scaled.jpg"></ion-img>
+  <ion-card-content>
+    <ion-button (click)="OnClick()" expand="block" fill="solid" shape="round">
+      <ion-icon name="star-outline"></ion-icon>
+    </ion-button>
+  </ion-card-content>
+</ion-card>

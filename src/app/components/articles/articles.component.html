@@ -1,3 +1,7 @@
-<p>
-  articles works!
-</p>
+<ion-grid>
+  <ion-row>
+    <ion-col *ngFor="let article of Albums; let i = index" size="6" size-lg="3" size-md="4" size-sm="6" size-xs="12">
+      <app-article [album]="article" [i]="i"></app-article>
+    </ion-col>
+  </ion-row>
+</ion-grid>

@@ -1,14 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Album } from 'src/app/Interfaces';
 
 @Component({
   selector: 'app-article',
   templateUrl: './article.component.html',
   styleUrls: ['./article.component.scss'],
 })
-export class ArticleComponent  implements OnInit {
+export class ArticleComponent{
+
+  @Input() album!: Album
+  @Input() i: number = 0; 
 
   constructor() { }
 
-  ngOnInit() {}
+  OnClick(){
+    console.log("Click");
+  }
 
 }
