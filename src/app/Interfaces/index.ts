@@ -22,7 +22,6 @@ export interface Album {
     artist:  Artist;
     image:   Image[];
     "@attr": AlbumAttr;
-    favorito?: boolean;
 }
 
 export interface AlbumAttr {

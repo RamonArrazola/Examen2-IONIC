@@ -1,32 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Album } from 'src/app/Interfaces/index';
-import { InfiniteScrollCustomEvent } from '@ionic/angular';
+import { StorageService } from 'src/app/services/storage.service';
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page implements OnInit {
-
-  Favoritos = [];
   bool: boolean = false;
-  public Album: Album[] = [];
-
-  constructor() {}
-
-  ngOnInit(){
-    if(this.Favoritos.length > 0){
+  get albums(): Album[] {
+    if (this.storage.localAlbums.length > 0) {
       this.bool = true;
     }
+    return this.storage.localAlbums;
   }
 
-  loadData(event: any) {
-    // this.service.CustomSearch(this.Type, this.Method, this.selected as string, event).subscribe((respuesta) => {
-    //   this.Album = [...this.Album, ...respuesta];
+  constructor(private storage: StorageService) {}
 
-    //   setTimeout(() => {
-    //     (event as InfiniteScrollCustomEvent).target.complete();
-    //   }, 4000);
-    // });
+  ngOnInit(){
+    if (this.storage.localAlbums.length > 0) {
+      this.bool = true;
+    }
+    else{
+      this.bool = false;
+    }
   }
 }
