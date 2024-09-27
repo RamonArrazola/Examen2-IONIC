@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Album } from 'src/app/Interfaces/index';
 import { ServiceService } from 'src/app/services/service.service';
-import { IonInfiniteScroll } from '@ionic/angular';
+import { InfiniteScrollCustomEvent, IonSegment } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -21,18 +21,34 @@ export class Tab1Page implements OnInit{
     'rap'
   ];
 
+  public Method: string = 'tag.gettopalbums';
+  public Type: string = 'tag';
   public Album: Album[] = [];
   public selected: string =  this.categorias[0];
+  // @ViewChild(IonSegment) segment! : IonSegment;
 
   constructor(private service: ServiceService) {}
 
   ngOnInit(){
-    this.service.getTopAlbumsByTag(this.selected).subscribe((albums) => {
+    this.service.CustomSearch(this.Type, this.Method, this.selected).subscribe((albums) => {
       this.Album = [...this.Album, ...albums];
     });
   }
 
   segmentChanged(event: Event){
-    console.log(event);
+    this.selected = (event as CustomEvent).detail.value;
+    this.service.CustomSearch(this.Type, this.Method, this.selected).subscribe((albums) =>{
+      this.Album = [...albums];
+    });
+  }
+
+  loadData(event: any) {
+    this.service.CustomSearch(this.Type, this.Method, this.selected as string, event).subscribe((respuesta) => {
+      this.Album = [...this.Album, ...respuesta];
+
+      setTimeout(() => {
+        (event as InfiniteScrollCustomEvent).target.complete();
+      }, 4000);
+    });
   }
 }

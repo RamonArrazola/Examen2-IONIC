@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input} from '@angular/core';
 import { Album } from '../../Interfaces/index';
 
 @Component({
@@ -6,7 +6,7 @@ import { Album } from '../../Interfaces/index';
   templateUrl: './articles.component.html',
   styleUrls: ['./articles.component.scss'],
 })
-export class ArticlesComponent {
+export class ArticlesComponent{
 
   @Input() Albums: Album[] = [];
 

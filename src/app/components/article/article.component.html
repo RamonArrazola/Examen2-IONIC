@@ -1,16 +1,36 @@
-<ion-card>
-  <ion-card-subtitle class="ion-margin">
-    <span class="text-primary">{{i + 1 }}- </span>
-    <span class="album-artist-name">{{album.artist.name}}</span>
-  </ion-card-subtitle>
-  <ion-card-title class="ion-padding-horizontal ion-padding-bottom">
-    {{album.name}}
-  </ion-card-title>
-  <!-- <ion-img [src]="album.image"></ion-img> -->
-   <ion-img src="https://mexicanrarities.com/wp-content/uploads/1960/02/inah-sep_musica-indigena-de-mexico-06-scaled.jpg"></ion-img>
-  <ion-card-content>
-    <ion-button (click)="OnClick()" expand="block" fill="solid" shape="round">
-      <ion-icon name="star-outline"></ion-icon>
+<ion-card *ngIf="carga">
+  <div>
+    <ion-img *ngIf="album.image[3]['#text']" [src]="album.image[3]['#text']"></ion-img>
+    <ion-button (click)="OnClick()" fill="clear" shape="round" clas="button">
+      <ion-icon  slot="icon-only" [name]="Fav? 'heart' : 'heart-outline'" class="icon"></ion-icon>
     </ion-button>
+  </div>
+  <ion-card-content>
+    <ion-card-subtitle class="ion-margin">
+      <span class="text-primary">{{i + 1 }}- </span>
+      <span class="album-artist-name">{{album.artist.name}}</span>
+    </ion-card-subtitle>
+    <ion-card-title class="ion-padding-horizontal ion-padding-bottom">
+      {{album.name}}
+    </ion-card-title>
+  </ion-card-content>
+</ion-card>
+
+<ion-card *ngIf="!carga">
+  <div>
+    <ion-img ></ion-img>
+  </div>
+  <ion-card-content>
+    <ion-card-subtitle class="ion-margin">
+      <span>
+        <ion-skeleton-text [animated]="true" style="width: 40%;"></ion-skeleton-text>
+      </span>
+      <span>
+        <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text>
+      </span>
+    </ion-card-subtitle>
+    <ion-card-title>
+      <ion-skeleton-text [animated]="true" style="width: 100%;"></ion-skeleton-text>
+    </ion-card-title>
   </ion-card-content>
 </ion-card>

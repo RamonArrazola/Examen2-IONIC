@@ -1,17 +1,19 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header title="Buscador"></app-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <!-- Segment Content -->
+  <ion-segment [value]="selected" (ionChange)="Select($event)" mode="ios">
+    <ion-segment-button [value]="option" *ngFor="let option of options">
+      <ion-label class="ion-text-capitalize">{{option}}</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <!-- Serach Bar -->
+  <ion-searchbar placeholder="Buscar" [debounce]="250" (ionInput)="onSearchChange($event)" animated mode="ios"></ion-searchbar>
+  <!-- Articles -->
+  <app-articles [Albums]= "Album" *ngIf="busqueda !== ''"></app-articles>
+  <!-- Infinite Scroll -->
+  <ion-infinite-scroll threshold="150px" position="bottom" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="dots">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

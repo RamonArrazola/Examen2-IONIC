@@ -1,4 +1,4 @@
-export interface NewsResponse {
+export interface AlbumResponse {
     albums: Albums;
 }
 
@@ -21,7 +21,8 @@ export interface Album {
     url:     string;
     artist:  Artist;
     image:   Image[];
-    //"@attr": AlbumAttr;
+    "@attr": AlbumAttr;
+    favorito?: boolean;
 }
 
 export interface AlbumAttr {
@@ -52,3 +53,60 @@ export interface AlbumPage {
         albums: Album[]
     }
 }
+
+//Search 
+export interface SearchResponse {
+    results: Results;
+}
+
+export interface Results {
+    "opensearch:Query":        OpensearchQuery;
+    "opensearch:totalResults": string;
+    "opensearch:startIndex":   string;
+    "opensearch:itemsPerPage": string;
+    albummatches:              Albummatches;
+    "@attr":                   Attr;
+}
+
+export interface Attr {
+    for: string;
+}
+
+export interface Albummatches {
+    album: Album[];
+}
+
+export interface OpensearchQuery {
+    "#text":     string;
+    role:        string;
+    searchTerms: string;
+    startPage:   string;
+}
+// Artist Search 
+export interface ArtistSearchResponse {
+    topalbums: Topalbums;
+}
+
+export interface Topalbums {
+    album:   Album[];
+    "@attr": AAttr;
+}
+
+export interface AAttr {
+    artist:     ArtistEnum;
+    page:       string;
+    perPage:    string;
+    totalPages: string;
+    total:      string;
+}
+
+export enum ArtistEnum {
+    Cher = "Cher",
+}
+
+export interface ArtistClass {
+    name: ArtistEnum;
+    mbid: string;
+    url:  string;
+}
+

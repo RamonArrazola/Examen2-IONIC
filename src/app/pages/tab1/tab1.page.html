@@ -1,17 +1,6 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Albumes por genero
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header title="Albumes por género"></app-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Albumes por genero</ion-title>
-    </ion-toolbar>
-  </ion-header>
     <!-- Segment content -->
   <ion-segment [value]="selected" (ionChange)="segmentChanged($event)" mode="md" scrollable>
     <ion-segment-button [value]="category" *ngFor="let category of categorias">
@@ -20,6 +9,11 @@
       </ion-label>
     </ion-segment-button>
   </ion-segment>
+  <!-- Articulos -->
   <app-articles [Albums] = "Album"></app-articles>
-
+  <!-- Infinite Scroll -->
+  <ion-infinite-scroll threshold="150px" position="bottom" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="dots">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
